@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Application JavaScript</title>
+</head>
+
+<body>
+
+    <h2>Informations</h2>
+    <p id="affichage"></p>
+
+    <script>
+
+        let nom = "Bademba Barry";
+        let age = 20;
+        let estEcrivain = true;
+        let livre = {
+            titre: "La mine d'or",
+            auteur: "Bademba Barry",
+            pages: 125,
+            disponible: true
+        };
+
+
+        console.log(typeof nom);
+        console.log(typeof age);
+        console.log(typeof estEcrivain);
+        console.log(typeof livre);
+
+
+        let texte = "Nom : " + nom + "<br>" +
+            "Âge : " + age + "<br>" +
+            "Écrivain : " + (estEcrivain ? "Oui" : "Non") + "<br><br>" +
+            "<strong>Livre :</strong><br>" +
+            "Titre : " + livre.titre + "<br>" +
+            "Auteur : " + livre.auteur + "<br>" +
+            "Pages : " + livre.pages + "<br>" +
+            "Disponible : " + (livre.disponible ? "Oui" : "Non");
+
+        document.getElementById("affichage").innerHTML = texte;
+    </script>
+
+</body>
+
+</html>

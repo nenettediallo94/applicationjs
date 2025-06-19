@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vérification de l'âge</title>
+</head>
+<body>
+
+  <script>
+
+    function verifierAge(age) {
+      if (age >= 18) {
+        console.log("Votre statut : Vous êtes majeur.");
+      } else {
+        console.log("Votre statut : Vous êtes mineur.");
+      }
+    }
+
+ 
+    let ageUtilisateur = Number(prompt("Quel est votre âge ?"));
+
+  
+    verifierAge(ageUtilisateur);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minipageweb</title>
+    <link rel="stylesheet" href="minipage.css">
+</head>
+<body>
+
+    <div id="header">
+        <h1>Faites défiler pour changer ma couleur !</h1>
+    </div>
+
+    <div class="button-group">
+        <button class="effect-button">Bouton 1</button>
+        <button class="effect-button">Bouton 2</button>
+        <button class="effect-button">Bouton 3</button>
+        <button id="single-click-button">Cliquez-moi (addEventListener)</button>
+        <button id="onclick-button" onclick="alert('Bouton cliqué en utilisant l\'attribut onclick !')">Cliquez-moi (attribut onclick)</button>
+        <button id="remove-event-button">Cliquez pour supprimer l'événement</button>
+    </div>
+
+    <div id="hover-block">
+        Survolez-moi !
+    </div>
+
+    <p>Appuyez sur n'importe quelle touche pour voir son code :</p>
+    <div id="key-display"></div>
+
+    <div id="screen-width-display">
+        Largeur de l'écran : <span id="width-value"></span>px
+    </div>
+
+    <div class="parent-div">
+        Div Parent (Cliquer sur l'enfant ne m'affectera pas)
+        <div class="child-div">
+            Div Enfant (Cliquez-moi !)
+        </div>
+    </div>
+
+    <div id="dynamic-color-box"></div>
+    <button id="change-color-button">Changer la couleur de la boîte</button>
+
+    <form id="my-form">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Soumettre le formulaire</button>
+    </form>
+
+    <script src="minipage.js"></script>
+</body>
+</html>

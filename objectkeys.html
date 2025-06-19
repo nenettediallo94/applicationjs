@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Afficher les objets clés</title>
+</head>
+
+<body>
+
+    <script>
+let phrase = prompt("Ecris une phrase :");
+
+
+    let mots = phrase.split(" "); 
+
+
+    let motsMaj = mots.map(function(mot) {
+        return mot.toUpperCase();
+    });
+
+
+    let motsFiltres = motsMaj.filter(function(mot) {
+        return mot.length > 3;
+    });
+
+
+    let objetMots = {};
+    for (let i = 0; i < motsFiltres.length; i++) {
+        objetMots[motsFiltres[i]] = motsFiltres[i].length;
+    }
+
+
+    let cles = Object.keys(objetMots);
+    console.log("Clés (mots en majuscule de plus de 3 lettres) :", cles);
+    console.log("Objet complet :", objetMots);
+    </script>
+
+</body>
+
+</html>

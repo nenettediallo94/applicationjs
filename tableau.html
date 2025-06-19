@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau d'élèves</title>
+</head>
+
+<body>
+
+    <script>
+        let eleves = [
+            { nom: "AD", classe: "6ème" },
+            { nom: "MC", classe: "5ème" },
+            { nom: "FK", classe: "4ème" }
+        ];
+
+        for (let i = 0; i < eleves.length; i++) {
+            console.log("Nom :", eleves[i].nom, "| Classe :", eleves[i].classe);
+        }
+         eleves[0].classe = "5ème";
+
+    
+
+    for (let i = 0; i < eleves.length; i++) {
+        console.log("Nom :", eleves[i].nom, "| Classe :", eleves[i].classe);
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+
+   /* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding-top: 60px; /* Pour éviter que l'en-tête ne chevauche le contenu */
+}
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: lightblue;
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+.button-group {
+    display: flex; /* Active Flexbox sur le conteneur */
+    flex-direction: column; /* Aligne les éléments enfants en colonne (verticalement) */
+    align-items: flex-start; /* Aligne les éléments au début de l'axe transversal (à gauche) */
+    margin-top: 20px; /* Ajoute un peu d'espace au-dessus du groupe de boutons */
+}
+.button-group button {
+    padding: 10px 15px;
+    margin-bottom: 5px; /* Ajoute une marge en bas de chaque bouton au lieu de tous les côtés */
+    font-size: 16px;
+    cursor: pointer;
+    width: fit-content; /* S'assure que le bouton ne prend que la largeur nécessaire */
+}
+#hover-block {
+    width: 200px;
+    height: 100px;
+    background-color: lightgreen;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+}
+#key-display {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+#screen-width-display {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+.parent-div {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffe0b2;
+    border: 1px solid orange;
+}
+.child-div {
+    padding: 15px;
+    background-color: #ffcc80;
+    border: 1px solid darkorange;
+    cursor: pointer;
+    margin-top: 10px;
+}
+#dynamic-color-box {
+    width: 100px;
+    height: 100px;
+    background-color: var(--dynamic-bg-color, purple); /* Couleur par défaut */
+    margin-top: 20px;
+    border: 1px solid #333;
+}
+form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    background-color: #f0f0f0;
+}
+form button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

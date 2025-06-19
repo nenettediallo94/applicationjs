@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Générateur sécurisé</title>
+</head>
+
+<body>
+
+    <h2>Mot de passe sécurisé </h2>
+
+    <label>Longueur (doit être 8) :
+        <input type="number" id="longueur" value="8" min="4" max="20">
+    </label><br><br>
+
+    <label><input type="checkbox" id="majuscules" checked> Majuscules</label><br>
+    <label><input type="checkbox" id="minuscules" checked> Minuscules</label><br>
+    <label><input type="checkbox" id="chiffres" checked> Chiffres</label><br>
+    <label><input type="checkbox" id="symboles" checked> Symboles</label><br><br>
+
+    <button onclick="genererMotDePasse()">Générer</button>
+
+    <h3>Mot de passe :</h3>
+    <p id="resultat" style="font-weight: bold; font-size: 1.2em;"></p>
+
+    <script>
+        function genererMotDePasse() {
+            const longueur = parseInt(document.getElementById("longueur").value);
+            const inclureMaj = document.getElementById("majuscules").checked;
+            const inclureMin = document.getElementById("minuscules").checked;
+            const inclureChiffres = document.getElementById("chiffres").checked;
+            const inclureSymboles = document.getElementById("symboles").checked;
+
+
+            if (longueur < 4 || longueur > 20) {
+                document.getElementById("resultat").textContent =
+                    "La longueur du mot de passe doit être exactement 8 caractères.";
+                return;
+            }
+
+
+            if (!inclureMaj || !inclureMin || !inclureChiffres || !inclureSymboles) {
+                document.getElementById("resultat").textContent =
+                    "Tu dois cocher les 4 types de caractères pour générer un mot de passe.";
+                return;
+            }
+
+            const lettresMaj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const lettresMin = "abcdefghijklmnopqrstuvwxyz";
+            const chiffres = "0123456789";
+            const symboles = "!@#$%^&*()_-+=<>?/";
+
+            let tous = lettresMaj + lettresMin + chiffres + symboles;
+            let motDePasseArray = [];
+
+
+            motDePasseArray.push(lettresMaj[Math.floor(Math.random() * lettresMaj.length)]);
+            motDePasseArray.push(lettresMin[Math.floor(Math.random() * lettresMin.length)]);
+            motDePasseArray.push(chiffres[Math.floor(Math.random() * chiffres.length)]);
+            motDePasseArray.push(symboles[Math.floor(Math.random() * symboles.length)]);
+
+
+            for (let i = motDePasseArray.length; i < 8; i++) {
+                motDePasseArray.push(tous[Math.floor(Math.random() * tous.length)]);
+            }
+
+
+            motDePasseArray = motDePasseArray.sort(() => 0.5 - Math.random());
+            const motDePasse = motDePasseArray.join("");
+
+            document.getElementById("resultat").textContent = motDePasse;
+        }
+    </script>
+
+</body>
+
+</html>

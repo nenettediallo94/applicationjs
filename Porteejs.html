@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Application portée js</title>
+</head>
+<body>
+
+  <script>
+    var x = 10;
+    let y = 20;
+    const z = 30;
+
+    console.log("En dehors de la fonction :");
+    console.log("x (var) =", x);
+    console.log("y (let) =", y);
+    console.log("z (const) =", z);
+
+    function testVariables() {
+      // Redéclaration avec les mêmes noms à l'intérieur de la fonction
+      var x = 100;     // OK : var est local à la fonction
+      let y = 200;     // OK : let est local au bloc
+      const z = 300;   // OK : const est local au bloc
+
+      console.log("À l'intérieur de la fonction :");
+      console.log("x (var) =", x);   // 100
+      console.log("y (let) =", y);   // 200
+      console.log("z (const) =", z); // 300
+    }
+
+    testVariables();
+
+    console.log("Après la fonction (valeurs globales) :");
+    console.log("x (var) =", x);   // 10 → reste inchangé à l'extérieur
+    console.log("y (let) =", y);   // 20
+    console.log("z (const) =", z); // 30
+
+    // Bloc conditionnel pour tester encore la portée
+    if (true) {
+      var a = "Je suis en var dans un bloc";
+      let b = "Je suis en let dans un bloc";
+      const c = "Je suis en const dans un bloc";
+
+      console.log("Dans le bloc :");
+      console.log(a); // OK
+      console.log(b); // OK
+      console.log(c); // OK
+    }
+
+    console.log("En dehors du bloc :");
+    console.log(a); // OK → car var est fonctionnelle (pas bloquée)
+    // console.log(b); // ❌ Erreur : b n'existe plus ici
+    // console.log(c); // ❌ Erreur : c n'existe plus ici
+  </script>
+
+</body>
+</html>

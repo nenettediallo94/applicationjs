@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>scope</title>
+</head>
+
+<body>
+
+    <script>
+        let nombre = 10;
+
+        function script() {
+            let nombre = 5;
+
+           // console.log("Nombre :", nombre2);//
+            console.log("Nombre :", nombre);
+        }
+
+        script();
+
+        console.log("Nombre :", nombre);
+
+        let message = "Bonjour du dehors";
+
+        function direBonjour() {
+            console.log(message); 
+        }
+
+        direBonjour();
+       // console.log(message); //
+    </script>
+
+</body>
+
+</html>
