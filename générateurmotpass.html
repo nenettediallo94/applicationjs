@@ -2,76 +2,144 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Générateur sécurisé</title>
+  <meta charset="UTF-8">
+  <title>Générateur sécurisé</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      max-width: 90%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0fb39d;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #0fb39d;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0a8070;
+    }
+
+    #resultat {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: #333;
+    }
+  </style>
 </head>
 
 <body>
 
-    <h2>Mot de passe sécurisé </h2>
+  <div class="container">
+    <h2>🔒 Mot de passe sécurisé</h2>
 
     <label>Longueur (doit être 8) :
-        <input type="number" id="longueur" value="8" min="4" max="20">
-    </label><br><br>
+      <input type="number" id="longueur" value="8" min="4" max="20">
+    </label>
 
-    <label><input type="checkbox" id="majuscules" checked> Majuscules</label><br>
-    <label><input type="checkbox" id="minuscules" checked> Minuscules</label><br>
-    <label><input type="checkbox" id="chiffres" checked> Chiffres</label><br>
-    <label><input type="checkbox" id="symboles" checked> Symboles</label><br><br>
+    <label><input type="checkbox" id="majuscules" checked> Majuscules</label>
+    <label><input type="checkbox" id="minuscules" checked> Minuscules</label>
+    <label><input type="checkbox" id="chiffres" checked> Chiffres</label>
+    <label><input type="checkbox" id="symboles" checked> Symboles</label>
 
     <button onclick="genererMotDePasse()">Générer</button>
 
-    <h3>Mot de passe :</h3>
-    <p id="resultat" style="font-weight: bold; font-size: 1.2em;"></p>
+    <p id="resultat"></p>
+  </div>
 
-    <script>
-        function genererMotDePasse() {
-            const longueur = parseInt(document.getElementById("longueur").value);
-            const inclureMaj = document.getElementById("majuscules").checked;
-            const inclureMin = document.getElementById("minuscules").checked;
-            const inclureChiffres = document.getElementById("chiffres").checked;
-            const inclureSymboles = document.getElementById("symboles").checked;
+  <script>
+    function genererMotDePasse() {
+      const longueur = parseInt(document.getElementById("longueur").value);
+      const inclureMaj = document.getElementById("majuscules").checked;
+      const inclureMin = document.getElementById("minuscules").checked;
+      const inclureChiffres = document.getElementById("chiffres").checked;
+      const inclureSymboles = document.getElementById("symboles").checked;
 
+      const resultat = document.getElementById("resultat");
 
-            if (longueur < 4 || longueur > 20) {
-                document.getElementById("resultat").textContent =
-                    "La longueur du mot de passe doit être exactement 8 caractères.";
-                return;
-            }
+      if (longueur !== 8) {
+        resultat.textContent = "❌ La longueur du mot de passe doit être exactement 8 caractères.";
+        resultat.style.color = "red";
+        return;
+      }
 
+      if (!inclureMaj || !inclureMin || !inclureChiffres || !inclureSymboles) {
+        resultat.textContent = "⚠️ Tu dois cocher les 4 types de caractères.";
+        resultat.style.color = "orange";
+        return;
+      }
 
-            if (!inclureMaj || !inclureMin || !inclureChiffres || !inclureSymboles) {
-                document.getElementById("resultat").textContent =
-                    "Tu dois cocher les 4 types de caractères pour générer un mot de passe.";
-                return;
-            }
+      const lettresMaj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const lettresMin = "abcdefghijklmnopqrstuvwxyz";
+      const chiffres = "0123456789";
+      const symboles = "!@#$%^&*()_-+=<>?/";
 
-            const lettresMaj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const lettresMin = "abcdefghijklmnopqrstuvwxyz";
-            const chiffres = "0123456789";
-            const symboles = "!@#$%^&*()_-+=<>?/";
+      let tous = lettresMaj + lettresMin + chiffres + symboles;
+      let motDePasseArray = [];
 
-            let tous = lettresMaj + lettresMin + chiffres + symboles;
-            let motDePasseArray = [];
+      // Ajouter un de chaque type obligatoire
+      motDePasseArray.push(lettresMaj[Math.floor(Math.random() * lettresMaj.length)]);
+      motDePasseArray.push(lettresMin[Math.floor(Math.random() * lettresMin.length)]);
+      motDePasseArray.push(chiffres[Math.floor(Math.random() * chiffres.length)]);
+      motDePasseArray.push(symboles[Math.floor(Math.random() * symboles.length)]);
 
+      // Ajouter des caractères restants aléatoires
+      for (let i = motDePasseArray.length; i < 8; i++) {
+        motDePasseArray.push(tous[Math.floor(Math.random() * tous.length)]);
+      }
 
-            motDePasseArray.push(lettresMaj[Math.floor(Math.random() * lettresMaj.length)]);
-            motDePasseArray.push(lettresMin[Math.floor(Math.random() * lettresMin.length)]);
-            motDePasseArray.push(chiffres[Math.floor(Math.random() * chiffres.length)]);
-            motDePasseArray.push(symboles[Math.floor(Math.random() * symboles.length)]);
+      // Mélanger
+      motDePasseArray = motDePasseArray.sort(() => 0.5 - Math.random());
+      const motDePasse = motDePasseArray.join("");
 
-
-            for (let i = motDePasseArray.length; i < 8; i++) {
-                motDePasseArray.push(tous[Math.floor(Math.random() * tous.length)]);
-            }
-
-
-            motDePasseArray = motDePasseArray.sort(() => 0.5 - Math.random());
-            const motDePasse = motDePasseArray.join("");
-
-            document.getElementById("resultat").textContent = motDePasse;
-        }
-    </script>
+      resultat.textContent = motDePasse;
+      resultat.style.color = "#0fb39d";
+    }
+  </script>
 
 </body>
 

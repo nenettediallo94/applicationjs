@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Validation Simple</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #7aaf92;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: transparent;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: block;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 1em;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Validation de Formulaire</h1>
+        <form id="myForm">
+            <div class="form-group">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required>
+                <span class="error-message" id="nameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error-message" id="emailError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+                <span class="error-message" id="passwordError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe :</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <span class="error-message" id="confirmPasswordError"></span>
+            </div>
+
+            <button type="submit">Soumettre</button>
+            <p id="successMessage" class="success-message"></p>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('myForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const successMessage = document.getElementById('successMessage');
+
+        function setError(element, message) {
+            element.textContent = message;
+        }
+
+        function validateField(inputElement, errorElement, validationFn, errorMessage) {
+            const value = inputElement.value.trim();
+            if (!validationFn(value)) {
+                setError(errorElement, errorMessage);
+                return false;
+            }
+            setError(errorElement, ''); 
+            return true;
+        }
+
+
+        function validateName() {
+            const nameValue = nameInput.value.trim();
+            if (nameValue.length < 3) {
+                setError(nameError, 'Le nom doit contenir au moins 3 caractères.');
+                return false;
+            }
+            if (!/^[a-zA-ZÀ-ÿ\s'-]+$/.test(nameValue)) {
+                setError(nameError, 'Le nom ne doit contenir que des lettres, espaces, tirets et apostrophes.');
+                return false;
+            }
+            setError(nameError, '');
+            return true;
+        }
+
+        function validateEmail() {
+            const emailValue = emailInput.value.trim();
+            if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(emailValue)) {
+                setError(emailError, 'Veuillez entrer une adresse email valide.');
+                return false;
+            }
+            setError(emailError, '');
+            return true;
+        }
+
+        function validatePassword() {
+            const passwordValue = passwordInput.value;
+            let errors = [];
+
+            if (passwordValue.length < 8) {
+                errors.push('Au moins 8 caractères.');
+            }
+            if (!/[A-Z]/.test(passwordValue)) {
+                errors.push('Au moins une majuscule.');
+            }
+            if (!/[a-z]/.test(passwordValue)) {
+                errors.push('Au moins une minuscule.');
+            }
+            if (!/\d/.test(passwordValue)) {
+                errors.push('Au moins un chiffre.');
+            }
+            // Utilise une regex plus simple pour les symboles courants
+            if (!/[^a-zA-Z0-9\s]/.test(passwordValue)) { // Vérifie la présence de n'importe quel caractère qui n'est pas lettre, chiffre ou espace
+                errors.push('Au moins un symbole.');
+            }
+
+            if (errors.length > 0) {
+                setError(passwordError, 'Le mot de passe doit contenir :<br>' + errors.join('<br>'));
+                return false;
+            } else {
+                setError(passwordError, '');
+                return true;
+            }
+        }
+
+        // Validation de la Confirmation du Mot de passe
+        function validateConfirmPassword() {
+            const passwordValue = passwordInput.value;
+            const confirmPasswordValue = confirmPasswordInput.value;
+
+            if (confirmPasswordValue !== passwordValue) {
+                setError(confirmPasswordError, 'Les mots de passe ne correspondent pas.');
+                return false;
+            }
+            setError(confirmPasswordError, '');
+            return true;
+        }
+
+        // Fonction principale de validation du formulaire
+        function validateForm(event) {
+            event.preventDefault(); // Empêche la soumission par défaut
+
+            // Exécute toutes les validations et stocke les résultats
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            const isConfirmPasswordValid = validateConfirmPassword();
+
+            // Si toutes les validations sont bonnes
+            if (isNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
+                setError(successMessage, 'Formulaire soumis avec succès !');
+                successMessage.style.color = '#28a745';
+                setTimeout(() => {
+                    setError(successMessage, '');
+                    form.reset(); // Réinitialise le formulaire après succès
+                }, 3000);
+            } else {
+                setError(successMessage, 'Veuillez corriger les erreurs dans le formulaire.');
+                successMessage.style.color = '#dc3545';
+            }
+        }
+
+    
+        nameInput.addEventListener('input', validateName);
+        emailInput.addEventListener('input', validateEmail);
+        passwordInput.addEventListener('input', validatePassword);
+        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+
+        form.addEventListener('submit', validateForm);
+    </script>
+</body>
+</html>
