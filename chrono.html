@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chronomètre & Minuteur</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #c7c2db, #7a8ac0);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007c91;
+    }
+
+    .time {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>⏱️ Chronomètre</h2>
+  <div id="chrono" class="time">00:00:00</div>
+  <div class="d-flex justify-content-between mb-4">
+    <button onclick="startChrono()" class="btn btn-success">▶️ Start</button>
+    <button onclick="pauseChrono()" class="btn btn-warning">⏸ Pause</button>
+    <button onclick="resetChrono()" class="btn btn-danger">🔄 Reset</button>
+  </div>
+
+  <hr>
+
+  <h2>⏳ Minuteur</h2>
+  <input id="inputSecondes" type="number" class="form-control mb-2" placeholder="Secondes">
+  <div id="minuteur" class="time">00:00</div>
+  <div class="d-flex justify-content-between">
+    <button onclick="startMinuteur()" class="btn btn-success">▶️ Start</button>
+    <button onclick="pauseMinuteur()" class="btn btn-warning">⏸ Pause</button>
+    <button onclick="resetMinuteur()" class="btn btn-danger">🔄 Reset</button>
+  </div>
+</div>
+
+<script>
+  // --- CHRONOMÈTRE ---
+  let chronoInterval;
+  let chronoSecondes = 0;
+  let chronoActif = false;
+
+  function updateChronoDisplay() {
+    let h = String(Math.floor(chronoSecondes / 3600)).padStart(2, '0');
+    let m = String(Math.floor((chronoSecondes % 3600) / 60)).padStart(2, '0');
+    let s = String(chronoSecondes % 60).padStart(2, '0');
+    document.getElementById("chrono").textContent = `${h}:${m}:${s}`;
+  }
+
+  function startChrono() {
+    if (chronoActif) return;
+    chronoActif = true;
+    chronoInterval = setInterval(() => {
+      chronoSecondes++;
+      updateChronoDisplay();
+    }, 1000);
+  }
+
+  function pauseChrono() {
+    clearInterval(chronoInterval);
+    chronoActif = false;
+  }
+
+  function resetChrono() {
+    pauseChrono();
+    chronoSecondes = 0;
+    updateChronoDisplay();
+  }
+
+  // --- MINUTEUR ---
+  let minuteurInterval;
+  let minuteurSecondes = 0;
+  let minuteurActif = false;
+
+  function updateMinuteurDisplay() {
+    let m = String(Math.floor(minuteurSecondes / 60)).padStart(2, '0');
+    let s = String(minuteurSecondes % 60).padStart(2, '0');
+    document.getElementById("minuteur").textContent = `${m}:${s}`;
+  }
+
+  function startMinuteur() {
+    if (minuteurActif) return;
+
+    let input = document.getElementById("inputSecondes").value;
+    if (!minuteurSecondes && input > 0) {
+      minuteurSecondes = parseInt(input);
+      updateMinuteurDisplay();
+    }
+
+    if (minuteurSecondes > 0) {
+      minuteurActif = true;
+      minuteurInterval = setInterval(() => {
+        minuteurSecondes--;
+        updateMinuteurDisplay();
+        if (minuteurSecondes <= 0) {
+          pauseMinuteur();
+          alert("⏰ Temps écoulé !");
+        }
+      }, 1000);
+    }
+  }
+
+  function pauseMinuteur() {
+    clearInterval(minuteurInterval);
+    minuteurActif = false;
+  }
+
+  function resetMinuteur() {
+    pauseMinuteur();
+    minuteurSecondes = 0;
+    updateMinuteurDisplay();
+    document.getElementById("inputSecondes").value = "";
+  }
+</script>
+
+</body>
+</html>

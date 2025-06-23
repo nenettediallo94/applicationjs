@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulaire complet</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
+    <h2 class="text-2xl font-semibold mb-6 text-gray-800">Envoyer vos infos</h2>
+
+    <input id="nom" type="text" placeholder="Nom" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 transition" />
+    
+    <input id="prenom" type="text" placeholder="Prénom" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 transition" />
+    
+    <input id="age" type="number" placeholder="Âge" min="1" max="120" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 transition" />
+    
+    <input id="profession" type="text" placeholder="Profession" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 transition" />
+    
+    <input id="passion" type="text" placeholder="Passion" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 transition" />
+
+    <input id="ville" type="text" placeholder="Ville" class="w-full p-3 mb-6 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400 transition" />
+
+    <button
+      onclick="envoyerInfos()"
+      class="w-full bg-teal-500 text-white font-semibold py-3 rounded-md hover:bg-teal-600 transition transform hover:scale-105"
+    >
+      Envoyer
+    </button>
+
+    <p id="message" class="mt-5 text-lg min-h-[24px] font-semibold"></p>
+  </div>
+
+  <script>
+    function envoyerInfos() {
+      const nom = document.getElementById('nom').value.trim();
+      const prenom = document.getElementById('prenom').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const profession = document.getElementById('profession').value.trim();
+      const passion = document.getElementById('passion').value.trim();
+      const ville = document.getElementById('ville').value.trim();
+      const messageEl = document.getElementById('message');
+      messageEl.textContent = '';
+      messageEl.className = 'mt-5 text-lg min-h-[24px] font-semibold';
+
+      
+      if (!nom || !prenom || !age || !profession || !passion || !ville) {
+        messageEl.textContent = "Merci de remplir tous les champs.";
+        messageEl.classList.add('text-red-500');
+        return;
+      }
+      if (isNaN(age) || age < 1 || age > 120) {
+        messageEl.textContent = "Veuillez entrer un âge valide (1-120).";
+        messageEl.classList.add('text-red-500');
+        return;
+      }
+
+      const data = { nom, prenom, age: Number(age), profession, passion, ville };
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(json => {
+        console.log("Réponse serveur :", json);
+        messageEl.textContent = "envoyé avec succès !";
+        messageEl.classList.add('text-green-600');
+
+        setTimeout(() => {
+          messageEl.textContent = '';
+          messageEl.className = 'mt-5 text-lg min-h-[24px] font-semibold';
+
+          
+          document.getElementById('nom').value = '';
+          document.getElementById('prenom').value = '';
+          document.getElementById('age').value = '';
+          document.getElementById('profession').value = '';
+          document.getElementById('passion').value = '';
+          document.getElementById('ville').value = '';
+        }, 4000);
+      })
+      .catch(() => {
+        messageEl.textContent = "Erreur lors de l'envoi.";
+        messageEl.classList.add('text-red-500');
+      });
+    }
+  </script>
+
+</body>
+</html>

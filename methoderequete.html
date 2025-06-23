@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Commentaires API (Simulé)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e9ecef;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0fb39d;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #0fb39d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background-color: #0d9a88;
+    }
+
+    .comment {
+      background: #f8f9fa;
+      padding: 10px;
+      margin-top: 10px;
+      border-left: 4px solid #0fb39d;
+      border-radius: 4px;
+    }
+
+    .comment strong {
+      color: #333;
+    }
+
+    .comment button {
+      background-color: #dc3545;
+      margin-left: 5px;
+    }
+
+    .comment button:first-of-type {
+      background-color: #007bff;
+    }
+
+    .comment button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Ajouter un commentaire</h2>
+
+    <input type="text" id="auteur" placeholder="Nom">
+    <textarea id="message" placeholder="Commentaire"></textarea>
+    <button onclick="ajouterOuModifier()">Envoyer</button>
+
+    <h2>Commentaires</h2>
+    <div id="listeCommentaires"></div>
+  </div>
+
+  <script>
+    let commentaires = [];
+    let indexAModifier = null;
+
+    function chargerCommentaires() {
+      fetch('https://jsonplaceholder.typicode.com/comments?_limit=0')
+        .then(res => res.json())
+        .then(data => {
+          commentaires = data.map(com => ({
+            auteur: com.name,
+            message: com.body
+          }));
+          afficherCommentaires();
+        });
+    }
+
+    function afficherCommentaires() {
+      const zone = document.getElementById("listeCommentaires");
+      zone.innerHTML = "";
+
+      commentaires.forEach((com, index) => {
+        const div = document.createElement("div");
+        div.className = "comment";
+        div.innerHTML = `
+          <strong>${com.auteur}</strong><br>
+          <span>${com.message}</span><br>
+          <button onclick="preparerModification(${index})">Modifier</button>
+          <button onclick="supprimer(${index})">Supprimer</button>
+        `;
+        zone.appendChild(div);
+      });
+    }
+
+    function ajouterOuModifier() {
+      const auteur = document.getElementById("auteur").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!auteur || !message) {
+        alert("Remplis les deux champs !");
+        return;
+      }
+
+      const nouveau = { auteur, message };
+
+      if (indexAModifier !== null) {
+        commentaires[indexAModifier] = nouveau;
+        indexAModifier = null;
+      } else {
+        commentaires.unshift(nouveau);
+      }
+
+      document.getElementById("auteur").value = "";
+      document.getElementById("message").value = "";
+      afficherCommentaires();
+    }
+
+    function preparerModification(index) {
+      const commentaire = commentaires[index];
+      document.getElementById("auteur").value = commentaire.auteur;
+      document.getElementById("message").value = commentaire.message;
+      indexAModifier = index;
+    }
+
+    function supprimer(index) {
+      if (confirm("Supprimer ce commentaire ?")) {
+        commentaires.splice(index, 1);
+        afficherCommentaires();
+      }
+    }
+
+    chargerCommentaires();
+  </script>
+
+</body>
+</html>
