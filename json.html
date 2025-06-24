@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire de Stockage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      min-height: 80vh;
+    }
+
+    .container {
+      width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .resultat {
+      width: 320px;
+      min-height: 250px;
+      background: #eef;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      margin: 10px 0;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main">
+    <!-- Formulaire -->
+    <div class="container">
+      <h2>Formulaire utilisateur</h2>
+      <label for="nom">Nom :</label>
+      <input type="text" id="nom" placeholder="Entrez votre nom">
+
+      <label for="age">Âge :</label>
+      <input type="number" id="age" placeholder="Entrez votre âge">
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" placeholder="Entrez votre email">
+
+      <label for="pseudo">Pseudo (cookie) :</label>
+      <input type="text" id="pseudo" placeholder="Entrez votre pseudo">
+
+      <label for="role">Rôle :</label>
+      <select id="role">
+        <option value="admin">Admin</option>
+        <option value="user">Utilisateur</option>
+      </select>
+
+      <button onclick="enregistrerDonnees()">Enregistrer</button>
+    </div>
+
+    <!-- Résultats -->
+    <div class="resultat">
+      <h3>Résultat</h3>
+      <p id="localStorageAffichage"></p>
+      <p id="cookieAffichage"></p>
+      <p id="sessionStorageAffichage"></p>
+    </div>
+  </div>
+
+  <script>
+    function enregistrerDonnees() {
+      const nom = document.getElementById("nom").value;
+      const age = document.getElementById("age").value;
+      const email = document.getElementById("email").value;
+      const pseudo = document.getElementById("pseudo").value;
+      const role = document.getElementById("role").value;
+
+      // localStorage
+      const utilisateur = { nom, age, email };
+      localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+      document.getElementById("localStorageAffichage").innerHTML =
+        `Nom : ${nom}<br>Âge : ${age}<br>Email : ${email}`;
+
+      // cookie
+      const expireDate = new Date();
+      expireDate.setDate(expireDate.getDate() + 7);
+      document.cookie = `username=${pseudo}; expires=${expireDate.toUTCString()}; path=/`;
+      document.getElementById("cookieAffichage").innerHTML = `Pseudo : ${pseudo}`;
+
+      // sessionStorage
+      sessionStorage.setItem("role", role);
+      document.getElementById("sessionStorageAffichage").innerHTML = `Rôle : ${role}`;
+    }
+
+    // 🔁 Lecture automatique des données au chargement de la page
+    window.onload = function () {
+      // localStorage
+      const data = JSON.parse(localStorage.getItem("utilisateur"));
+      if (data) {
+        document.getElementById("localStorageAffichage").innerHTML =
+          `Nom : ${data.nom}<br>Âge : ${data.age}<br>Email : ${data.email}`;
+      }
+
+      // cookie
+      const cookies = document.cookie;
+      const username = cookies.split("; ").find(c => c.startsWith("username="))?.split("=")[1];
+      document.getElementById("cookieAffichage").innerHTML =
+        `Pseudo : ${username || "Non trouvé"}`;
+
+      // sessionStorage
+      const role = sessionStorage.getItem("role");
+      document.getElementById("sessionStorageAffichage").innerHTML =
+        role ? `Rôle : ${role}` : "";
+    };
+  </script>
+
+</body>
+</html>
+
+
