@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html>
+<body>
+<h1>Objets simples</h1>
+
+<script>
+
+const utilisateur1 = {
+  nom: "Ali",
+  age: 43,
+  email: "ali32@gmail.com",
+  sePresenter: function() {
+    console.log("Bonjour, je m'appelle " + this.nom + " et j'ai " + this.age + " ans.");
+  }
+};
+
+
+const utilisateur2 = {
+  nom: "Diaby",
+  age: 17,
+  email: "diabyo30@gmail.com",
+  sePresenter: function() {
+    console.log("Bonjour, je m'appelle " + this.nom + " et j'ai " + this.age + " ans.");
+  }
+};
+
+
+const utilisateur3 = {
+  nom: "Fatou",
+  age: 66,
+  email: "foulare@gmail.com",
+  sePresenter: function() {
+    console.log("Bonjour, je m'appelle " + this.nom + " et j'ai " + this.age + " ans.");
+  }
+};
+
+
+console.log("Email de utilisateur1 :", utilisateur1.email);
+console.log("Email de utilisateur2 :", utilisateur2.email);
+console.log("Email de utilisateur3 :", utilisateur3.email);
+
+utilisateur1.email = "ali324@gmail.com";
+console.log("Email de l'utlisateur1 mis à jour :", utilisateur1.email);
+
+utilisateur1.sePresenter();
+utilisateur2.sePresenter();
+utilisateur3.sePresenter();
+</script>
+
+</body>
+</html>
+
+

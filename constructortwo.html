@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Fonction constructeur avec modèle d'objet</h1>
+
+<script>
+function Personne(nom, age) {
+  this.nom = nom;
+  this.age = age;
+
+  this.saluer = function() {
+    console.log("Salut, je suis " + this.nom);
+  };
+}
+
+const personne1 = new Personne("Oumou", 23);
+const personne2 = new Personne("Hadi", 14);
+
+personne1.saluer(); 
+personne2.saluer(); 
+</script>
+
+</body>
+</html>

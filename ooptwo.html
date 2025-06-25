@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Objet simple2 </h1>
+
+    <script>
+        class Utilisateur {
+            constructor(nom, age, email) {
+                this.nom = nom;
+                this.age = age;
+                this.email = email;
+            }
+
+            afficher() {
+                console.log(
+                    "Nom : " + this.nom + ", Âge : " + this.age + ", Email : " + this.email
+                );
+            }
+        }
+
+        const ali = new Utilisateur("Ali", 25, "ali32@gmail.com");
+
+        ali.afficher(); 
+
+        ali.email = "ali324@gmail.com";
+
+        console.log("Email mis à jour :");
+        ali.afficher();
+    </script>
+</body>
+</html>
+
