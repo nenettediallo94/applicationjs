@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Classe OOP</h1>
+
+<script>
+
+class Animal {
+  constructor(nom, espece) {
+    this.nom = nom;
+    this.espece = espece;
+  }
+
+  crier() {
+    console.log(this.nom + " est un(e) " + this.espece + " qui crie !");
+  }
+}
+
+const animal1 = new Animal("Simba", "Lion");
+const animal2 = new Animal("Coco", "Perroquet");
+
+animal1.crier(); 
+animal2.crier(); 
+</script>
+
+</body>
+</html>
