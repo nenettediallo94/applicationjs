@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Ajout dynamique de propriétés et méthodes</h1>
+
+<script>
+const voiture = {
+  marque: "Mazda",
+  annee: 2025
+};
+
+
+voiture.couleur = "Blanche";
+
+voiture.afficherInfos = function() {
+  console.log("Marque : " + this.marque);
+  console.log("Année : " + this.annee);
+  console.log("Couleur : " + this.couleur);
+};
+
+voiture.afficherInfos();
+</script>
+
+</body>
+</html>
