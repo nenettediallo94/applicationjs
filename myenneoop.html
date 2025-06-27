@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul de la moyenne</title>
+</head>
+<body>
+    <script>
+class Eleve {
+  constructor(nom, classe, notes) {
+    this.nom = nom;
+    this.classe = classe;
+    this.notes = notes;
+  }
+
+  calculerMoyenne() {
+    const total = this.notes.reduce((somme, note) => somme + note, 0);
+    return (total / this.notes.length).toFixed(2);
+  }
+
+  afficherInfos() {
+        console.log(this.nom + " en classe de " + this.classe + " a une moyenne de " + this.calculerMoyenne() + "/20.");
+  }
+}
+
+const eleve1 = new Eleve("Bea", "12e", [18, 16, 12, 13]);
+eleve1.afficherInfos();
+</script>
+</body>
+</html>

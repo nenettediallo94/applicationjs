@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Tableau d'objets oop</h1>
+<h1>Tableau d'objets OOP</h1>
+
 
 <script>
+class Etudiant {
+  constructor(nom, note) {
+    this.nom = nom;
+    this.note = note;
+  }
+
+  afficherNote() {
+    console.log(this.nom + " a obtenu " + this.note + "/20.");
+  }
+}
+
 const etudiants = [
-  { nom: "Oumar", note: 17 },
-  { nom: "Binta", note: 15 },
-  { nom: "Diouldé", note: 19 }
+  new Etudiant("Oumar", 17),
+  new Etudiant("Binta", 15),
+  new Etudiant("Diouldé", 19)
 ];
 
-for (let i = 0; i < etudiants.length; i++) {
-  console.log(etudiants[i].nom + " a obtenu " + etudiants[i].note + "/20.");
+for (let etudiant of etudiants) {
+  etudiant.afficherNote();
 }
 </script>
 

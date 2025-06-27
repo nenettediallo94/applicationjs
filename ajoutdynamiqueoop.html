@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <body>
-<h1>Ajout dynamique de propriétés et méthodes</h1>
-
-<script>
-const voiture = {
-  marque: "Mazda",
-  annee: 2025
-};
+  <h1>Ajout dynamique - OOP</h1>
 
 
-voiture.couleur = "Blanche";
+  <script>
 
-voiture.afficherInfos = function() {
-  console.log("Marque : " + this.marque);
-  console.log("Année : " + this.annee);
-  console.log("Couleur : " + this.couleur);
-};
+    class Voiture {
+      constructor(marque, annee) {
+        this.marque = marque;
+        this.annee = annee;
+        this.couleur = null;
+      }
 
-voiture.afficherInfos();
-</script>
+      afficher() {
+        console.log("Marque : " + this.marque);
+        console.log("Année : " + this.annee);
+        console.log("Couleur : " + this.couleur);
+      }
+
+      definirCouleur(couleur) {
+        this.couleur = couleur;
+      }
+    }
+
+    const maVoiture = new Voiture("Mazda", 2025);
+
+    maVoiture.definirCouleur("Rouge");
+
+    maVoiture.afficher();
+  </script>
 
 </body>
+
 </html>
