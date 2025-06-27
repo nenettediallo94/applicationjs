@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype 1 animal</title>
+</head>
+
+<body>
+    <script>
+        // function Animal(espèce, nom) {
+        //     this.espèce = espèce;
+        //     this.nom = nom;
+        // }
+        // Animal.prototype.presenter = function () {
+        //     console.log("C'est une espèce de " + this.espèce + " et elle s'appelle " + this.nom + ".");
+
+        // }
+        // const Animal1 = new Animal("chat", "Michou");
+        // const Animal2 = new Animal("chien", "Medor");
+
+        // Animal1.presenter();
+        // Animal2.presenter();
+
+        // Classprototype
+
+        //     class Animal {
+        //   constructor(espece, nom) {
+        //     this.espece = espece;
+        //     this.nom = nom;
+        //   }
+
+        //   presenter() {
+        //     console.log("C'est une espèce de " + this.espece + " et elle s'appelle " + this.nom + ".");
+        //   }
+        // }
+
+        // const animal1 = new Animal("chat", "Michou");
+        // const animal2 = new Animal("chien", "Medor");
+
+        //  animal1.presenter();
+        // animal2.presenter();
+
+        // Heritage
+        class Animal {
+            constructor(espece, nom) {
+                this.espece = espece;
+                this.nom = nom;
+            }
+
+            presenter() {
+                console.log("C'est une espèce de " + this.espece + " et elle s'appelle " + this.nom + ".");
+            }
+        }
+        class Chien extends Animal {
+            aboie() {
+                console.log(this.nom + " aboie !");
+            }
+        }
+
+        const dog = new Chien("chien", "Médor");
+        dog.presenter();
+        dog.aboie();
+    </script>
+</body>
+
+</html>
