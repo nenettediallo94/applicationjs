@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversion JSON avec erreur</title>
+</head>
+<body>
+  <h2> conversion JSON invalide</h2>
+
+  <p id="message"></p>
+
+  <script>
+    const chaine = "{ nom: 'Ali' }"; 
+
+    try {
+      const objet = JSON.parse(chaine);
+      document.getElementById("message").innerHTML = "Conversion réussie : " , message;
+    } catch (erreur) {
+        console.log("erreur de conversion")
+
+    }
+  </script>
+</body>
+</html>
