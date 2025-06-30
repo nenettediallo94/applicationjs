@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Division avec vérification</title>
+</head>
+<body>
+
+  <label>Numérateur :</label>
+  <input type="number" id="numerateur"><br>
+
+  <label>Dénominateur :</label>
+  <input type="number" id="denominateur"><br>
+
+  <button onclick="diviser()">Diviser</button>
+
+  <p id="message"></p>
+
+  <script>
+    function diviser() {
+      const num = Number(document.getElementById("numerateur").value);
+      const den = Number(document.getElementById("denominateur").value);
+      const message = document.getElementById("message");
+
+      try {
+        if (den === 0) {
+          throw new Error("Le dénominateur ne peut pas être zéro !");
+        }
+
+        const resultat = num / den;
+        message.textContent = "Résultat : " + resultat;
+      } catch (erreur) {
+        message.textContent = "Erreur : " + erreur.message;
+      }
+    }
+  </script>
+</body>
+</html>
+
