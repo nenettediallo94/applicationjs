@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Panier d'achat drag and drop</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      padding: 20px;
+    }
+
+    #conteneur {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .zone {
+      border: 2px solid #ccc;
+      padding: 8px;
+      margin: 10px;
+      width: 250px;
+    }
+
+    .produit {
+      padding: 6px;
+      margin: 2px;
+      background-color: #ec3203;
+      color: white;
+      width: 80px;
+      text-align: center;
+      cursor: grab;
+      font-size: 14px;
+    }
+
+    #panier {
+      background-color: #5ed381;
+                 
+      width: 250px;                  
+      display: flex;                
+      flex-wrap: wrap;              
+      align-content: flex-start;    
+      gap: 5px;                     
+      overflow-y: hidden;           
+      overflow-x: auto;             
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="conteneur">
+    <h2>Produits</h2>
+    <div id="produits" class="zone">
+      <div id="livre" class="produit" draggable="true">Livre</div>
+      <div id="cahier" class="produit" draggable="true">Cahier</div>
+      <div id="stylo" class="produit" draggable="true">Stylo</div>
+    </div>
+
+    <h2>Panier</h2>
+    <div id="panier" class="zone" ondragover="event.preventDefault()" ondrop="ajouterAuPanier(event)">
+    </div>
+  </div>
+
+  <script>
+    function ajouterAuPanier(event) {
+      event.preventDefault();
+      const nomProduit = event.dataTransfer.getData("text/plain");
+
+      const nouvelElement = document.createElement("div");
+      nouvelElement.textContent = nomProduit;
+      nouvelElement.className = "produit";
+      document.getElementById("panier").appendChild(nouvelElement);
+    }
+
+    const livre = document.getElementById("livre");
+    const cahier = document.getElementById("cahier");
+    const stylo = document.getElementById("stylo");
+
+    livre.addEventListener("dragstart", function (e) {
+      e.dataTransfer.setData("text/plain", "Livre");
+    });
+
+    cahier.addEventListener("dragstart", function (e) {
+      e.dataTransfer.setData("text/plain", "Cahier");
+    });
+
+    stylo.addEventListener("dragstart", function (e) {
+      e.dataTransfer.setData("text/plain", "Stylo");
+    });
+  </script>
+</body>
+</html>
