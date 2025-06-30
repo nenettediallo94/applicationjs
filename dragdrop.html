@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Drag and drop</title>
+    <style>
+        body {font-family: Arial, sans-serif;display: flex;justify-content: center;align-items: center;height: 100vh;gap: 50px;background-color: #f0f0f0;
+        }
+
+        #boite {width: 100px;height: 100px;background-color: blue;color: white;display: flex;justify-content: center;align-items: center;cursor: grab;
+        }
+
+        #zoneCible {width: 150px;height: 150px;border: 3px dashed #aaa;display: flex;justify-content: center;align-items: center;background-color: white;
+        }
+
+        #zoneCible.over {background-color: #e0f7ff;border-color: #2196f3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="boite" draggable="true">glisse et dépose</div>
+
+    <div id="zoneCible"></div>
+
+    <script>
+        const boite = document.getElementById("boite");
+        const zoneCible = document.getElementById("zoneCible");
+
+// Quand on commence à faire glisser
+        boite.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", boite.id);
+           
+        });
+
+// fin du glissement
+        boite.addEventListener("dragend", () => {
+            boite.style.display = "block";
+        });
+
+ // Quand on survole 
+        zoneCible.addEventListener("dragover", (e) => {
+            e.preventDefault();
+  
+        });
+
+// Quand on dépose dans la zone cible
+        zoneCible.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const id = e.dataTransfer.getData("text/plain");
+            const element = document.getElementById(id);
+            zoneCible.appendChild(element);
+
+        });
+    </script>
+
+</body>
+
+</html>
