@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestion Scolaire</title>
+  
+  <link rel="stylesheet" href="ecole.css" />
+
+  <script src="ecole.js"></script>
+
+</head>
+<body>
+  <!-- Navigation latérale -->
+  <nav>
+    <h2>Menu</h2>
+    <ul>
+      <li>Tableau de Bord</li>
+      <li>Gestion des Utilisateurs</li>
+      <li>Gestion des Élèves</li>
+      <li>Gestion du Personnel</li>
+      <li>Gestion des Emplois du Temps</li>
+      <li>Configurations Scolaires</li>
+      <li>Annonces & Communication</li>
+      <li>Rapports & Statistiques</li>
+    </ul>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main>
+    <!-- Header -->
+    <header>
+      <h1>Tableau de Bord Administratif</h1>
+    </header>
+
+    <!-- Section : Tableau de Bord -->
+    <section id="dashboard">
+      <div>
+        <p>Nombre total d’élèves : <strong>---</strong></p>
+        <p>Nombre d’enseignants : <strong>---</strong></p>
+        <p>Inscriptions en attente : <strong>---</strong></p>
+        <p>Alertes système : <strong>---</strong></p>
+        <p>Tâches prioritaires : <strong>---</strong></p>
+      </div>
+    </section>
+
+    <!-- Section : Gestion des Utilisateurs -->
+    <section id="gestion-utilisateurs">
+      <h2>Utilisateurs</h2>
+      <button>Ajouter un nouvel utilisateur</button>
+      <input type="search" placeholder="Rechercher un utilisateur" />
+      <ul>
+        <li>Utilisateur 1 <button>Modifier</button> <button>Supprimer</button></li>
+        <li>Utilisateur 2 <button>Modifier</button> <button>Supprimer</button></li>
+        <!-- etc. -->
+      </ul>
+    </section>
+
+    <!-- Section : Formulaire Ajout / Modification -->
+    <section id="formulaire-utilisateur">
+      <h3>Formulaire d'Ajout / Modification</h3>
+      <form>
+        <label>Nom : <input type="text" /></label><br>
+        <label>Email : <input type="email" /></label><br>
+        <label>Rôle :
+          <select>
+            <option>Élève</option>
+            <option>Enseignant</option>
+            <option>Parent</option>
+            <option>Personnel</option>
+          </select>
+        </label><br>
+        <button type="submit">Enregistrer</button>
+        <button type="button">Annuler</button>
+      </form>
+    </section>
+
+    <!-- Section : Gestion des Élèves -->
+    <section id="gestion-eleves">
+      <h2>Liste des Élèves</h2>
+      <button>Inscrire un nouvel élève</button>
+      <button>Attribuer à une classe</button>
+      <button>Générer un rapport</button>
+      <!-- Liste simulée -->
+      <ul>
+        <li>Élève 1 <button>Voir fiche</button></li>
+        <li>Élève 2 <button>Voir fiche</button></li>
+      </ul>
+    </section>
+
+    <!-- Section : Gestion des Emplois du Temps -->
+    <section id="gestion-emplois">
+      <h2>Emplois du Temps</h2>
+      <button>Créer un nouvel emploi du temps</button>
+      <button>Modifier</button>
+      <button>Publier / Dépublier</button>
+      <!-- Grille simplifiée -->
+      <table border="1">
+        <tr><th>Lundi</th><th>Mardi</th><th>...</th></tr>
+        <tr><td>Math</td><td>Français</td><td>...</td></tr>
+      </table>
+    </section>
+
+    <!-- Section : Configurations Scolaires -->
+    <section id="configurations">
+      <h2>Configurations</h2>
+      <div>
+        <h3>Matières</h3>
+        <button>Ajouter</button> <button>Modifier</button> <button>Supprimer</button>
+      </div>
+      <div>
+        <h3>Classes</h3>
+        <button>Ajouter</button> <button>Modifier</button> <button>Supprimer</button>
+      </div>
+      <div>
+        <h3>Années / Périodes</h3>
+        <button>Définir une nouvelle période</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,152 @@
+/* Palette de couleurs */
+:root {
+  --bleu: #2980b9;
+  --bleu-clair: #3498db;
+  --gris: #ecf0f1;
+  --gris-foncé: #2c3e50;
+  --blanc: #ffffff;
+  --rouge: #e74c3c;
+  --vert: #2ecc71;
+  --noir: #34495e;
+}
+
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: var(--gris);
+}
+
+/* Menu latéral */
+nav {
+  width: 240px;
+  background-color: var(--gris-foncé);
+  color: var(--blanc);
+  padding: 20px;
+}
+
+nav h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+nav li:hover {
+  color: var(--bleu-clair);
+  text-decoration: underline;
+}
+
+/* Contenu principal */
+main {
+  flex: 1;
+  padding: 30px;
+  background-color: var(--gris);
+}
+
+/* En-tête */
+header h1 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: var(--noir);
+}
+
+/* Sections */
+section {
+  margin-bottom: 40px;
+  background-color: var(--blanc);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2, section h3 {
+  margin-bottom: 15px;
+  color: var(--noir);
+}
+
+/* Boutons */
+button {
+  background-color: var(--bleu);
+  color: var(--blanc);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 5px 10px 0;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--bleu-clair);
+}
+
+button[type="button"] {
+  background-color: var(--rouge);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+select {
+  padding: 8px;
+  margin: 5px 0 15px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Listes */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+  background-color: var(--gris);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  main {
+    padding: 15px;
+  }
+}

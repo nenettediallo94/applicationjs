@@ -15,7 +15,7 @@ ajouterUtilisateur("Fatou");
 listerUtilisateurs();
 
 
-supprimerUtilisateur("Seydou");
+supprimerUtilisateur("Fatou");
 
 
 listerUtilisateurs();
